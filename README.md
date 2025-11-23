@@ -209,7 +209,6 @@ This site is configured for GitHub Pages deployment:
 
 - [Jekyll Documentation](https://jekyllrb.com/docs/)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
-- [Minimal Mistakes Theme Docs](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/)
 
 ## License
 
