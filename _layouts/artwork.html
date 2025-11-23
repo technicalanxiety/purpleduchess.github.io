@@ -8,11 +8,12 @@ layout: default
 -->
 
 <article class="artwork-detail">
-  <div class="artwork-hero">
+  <div class="artwork-hero" role="img" aria-label="Full size artwork image">
     {% if page.image %}
       <img src="{{ page.image | relative_url }}" 
-           alt="{{ page.title }}" 
-           class="artwork-image">
+           alt="{{ page.title }}{% if page.medium %} - {{ page.medium }}{% endif %}{% if page.year %}, {{ page.year }}{% endif %}" 
+           class="artwork-image"
+           loading="eager">
     {% endif %}
   </div>
 
@@ -39,7 +40,40 @@ layout: default
             <a href="{{ '/series/' | append: page.series | slugify | relative_url }}">{{ page.series }}</a>
           </span>
         {% endif %}
+        
+        {% if page.status %}
+          <span class="meta-item meta-item--status">
+            <strong>Status:</strong> 
+            <span class="artwork-status artwork-status--{{ page.status }}">
+              {% if page.status == 'available' %}
+                Available
+              {% elsif page.status == 'sold' %}
+                Sold
+              {% elsif page.status == 'nfs' %}
+                Not for Sale
+              {% elsif page.status == 'commission' %}
+                Commission
+              {% else %}
+                {{ page.status | capitalize }}
+              {% endif %}
+            </span>
+          </span>
+        {% endif %}
+        
+        {% if page.price and page.status == 'available' %}
+          <span class="meta-item meta-item--price">
+            <strong>Price:</strong> {{ page.price }}
+          </span>
+        {% endif %}
       </div>
+      
+      {% if page.status == 'available' %}
+        <div class="artwork-inquiry">
+          <a href="mailto:{{ site.author.email }}?subject=Inquiry about {{ page.title }}" class="btn btn--inquiry">
+            Inquire About This Piece
+          </a>
+        </div>
+      {% endif %}
     </header>
 
     {% if page.description %}

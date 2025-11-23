@@ -33,13 +33,15 @@ layout: default
            data-series="{{ piece.series }}">
         <a href="{{ piece.url | relative_url }}" class="gallery-link">
           {% if piece.thumbnail %}
-            <img src="{{ piece.thumbnail | relative_url }}" 
+            <img data-src="{{ piece.thumbnail | relative_url }}" 
                  alt="{{ piece.title }}"
-                 class="gallery-thumbnail">
+                 class="gallery-thumbnail"
+                 loading="lazy">
           {% elsif piece.image %}
-            <img src="{{ piece.image | relative_url }}" 
+            <img data-src="{{ piece.image | relative_url }}" 
                  alt="{{ piece.title }}"
-                 class="gallery-thumbnail">
+                 class="gallery-thumbnail"
+                 loading="lazy">
           {% endif %}
           
           <div class="gallery-overlay">
@@ -54,6 +56,8 @@ layout: default
   </div>
 </div>
 
+<!-- Loading animations -->
+<script src="{{ '/assets/js/loading-animations.js' | relative_url }}"></script>
 <!-- Image protection script -->
 <script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>
 <!-- Lightbox viewer -->

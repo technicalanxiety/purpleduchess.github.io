@@ -998,3 +998,189 @@ body, p, li {
     margin-bottom: 1rem !important;
   }
 }
+
+
+/* Artwork Status Badges */
+.artwork-status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &--available {
+    background: rgba(63, 166, 63, 0.2);
+    color: #7dd87d;
+    border: 1px solid #7dd87d;
+  }
+  
+  &--sold {
+    background: rgba(238, 95, 91, 0.2);
+    color: #ee9f9d;
+    border: 1px solid #ee9f9d;
+  }
+  
+  &--nfs {
+    background: rgba(214, 127, 5, 0.2);
+    color: #f5b563;
+    border: 1px solid #f5b563;
+  }
+  
+  &--commission {
+    background: rgba(59, 156, 186, 0.2);
+    color: #7dc4e4;
+    border: 1px solid #7dc4e4;
+  }
+}
+
+.meta-item--price {
+  font-size: 1.1rem;
+  color: #7dd87d !important;
+}
+
+.artwork-inquiry {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.btn--inquiry {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #7dd87d 0%, #5fb85f 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(125, 216, 125, 0.3);
+  
+  &:hover {
+    background: linear-gradient(135deg, #5fb85f 0%, #4a9a4a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(125, 216, 125, 0.4);
+  }
+}
+
+
+/* Loading Animations */
+.gallery-item,
+.artwork-image {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.gallery-item {
+  animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image loading skeleton */
+.artwork-image,
+.gallery-thumbnail {
+  background: linear-gradient(
+    90deg,
+    #3d2f4d 0%,
+    #4a3b5c 50%,
+    #3d2f4d 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.artwork-image[src],
+.gallery-thumbnail[src] {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Smooth transitions for filtered items */
+.gallery-item {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item:not(.filter-visible) {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+
+/* Accessibility Improvements */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #d4c5e8;
+  color: #2d1b3d;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+  
+  &:focus {
+    top: 0;
+  }
+}
+
+/* Focus visible styles */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #d4c5e8;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gallery-item {
+    border: 3px solid #fff;
+  }
+  
+  .artwork-status {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,113 @@
+---
+layout: default
+title: "Page Not Found"
+permalink: /404.html
+---
+
+<style>
+  .error-page {
+    text-align: center;
+    padding: 4rem 2rem;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #d4c5e8;
+    line-height: 1;
+    margin: 0;
+    text-shadow: 0 4px 20px rgba(212, 197, 232, 0.5);
+  }
+  
+  .error-title {
+    font-size: 2rem;
+    color: #fff;
+    margin: 1rem 0;
+  }
+  
+  .error-message {
+    font-size: 1.2rem;
+    color: #b19cd9;
+    margin: 1rem 0 2rem;
+    max-width: 600px;
+  }
+  
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .error-featured {
+    margin-top: 4rem;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .error-featured h3 {
+    color: #e6dff2;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<div class="error-page">
+  <h1 class="error-code">404</h1>
+  <h2 class="error-title">Artwork Not Found</h2>
+  <p class="error-message">
+    The page you're looking for seems to have wandered off the canvas. 
+    Let's get you back to the gallery.
+  </p>
+  
+  <div class="error-actions">
+    <a href="{{ '/' | relative_url }}" class="btn btn--primary btn--large">
+      Return Home
+    </a>
+    <a href="{{ '/gallery/' | relative_url }}" class="btn btn--primary btn--large">
+      View Gallery
+    </a>
+    <a href="{{ '/about/' | relative_url }}" class="btn btn--primary btn--large">
+      About the Artist
+    </a>
+  </div>
+  
+  <div class="error-featured">
+    <h3>While you're here, check out some featured artwork:</h3>
+    <div class="gallery-grid" style="max-width: 900px; margin: 0 auto;">
+      {% assign featured = site.artwork | sample: 3 %}
+      {% for piece in featured limit:3 %}
+        <div class="gallery-item">
+          <a href="{{ piece.url | relative_url }}" class="gallery-link">
+            {% if piece.thumbnail %}
+              <img src="{{ piece.thumbnail | relative_url }}" 
+                   alt="{{ piece.title }}"
+                   class="gallery-thumbnail">
+            {% elsif piece.image %}
+              <img src="{{ piece.image | relative_url }}" 
+                   alt="{{ piece.title }}"
+                   class="gallery-thumbnail">
+            {% endif %}
+            
+            <div class="gallery-overlay">
+              <h3 class="gallery-title">{{ piece.title }}</h3>
+              {% if piece.medium %}
+                <p class="gallery-medium">{{ piece.medium }}</p>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Image protection script -->
+<script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>
+<!-- Lightbox viewer -->
+<script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
