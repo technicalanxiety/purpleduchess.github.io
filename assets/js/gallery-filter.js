@@ -27,16 +27,14 @@
     filterContainer.className = 'gallery-filters';
     filterContainer.innerHTML = `
       <div class="filter-group">
-        <label for="search-input" class="filter-label">
-          <span class="visually-hidden">Search artwork</span>
-          <input 
-            type="text" 
-            id="search-input" 
-            class="filter-search" 
-            placeholder="Search artwork..."
-            aria-label="Search artwork by title or description"
-          />
-        </label>
+        <label for="search-input" class="filter-label">Search:</label>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="filter-search" 
+          placeholder="Search artwork..."
+          aria-label="Search artwork by title or description"
+        />
       </div>
       
       <div class="filter-group">
@@ -60,9 +58,12 @@
         </select>
       </div>
       
-      <button class="filter-reset" aria-label="Reset all filters">
-        Reset Filters
-      </button>
+      <div class="filter-group">
+        <label class="filter-label" style="visibility: hidden;">Reset:</label>
+        <button class="filter-reset" aria-label="Reset all filters">
+          Reset Filters
+        </button>
+      </div>
       
       <div class="filter-results" role="status" aria-live="polite"></div>
     `;
