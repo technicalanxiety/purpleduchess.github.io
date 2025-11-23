@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+<!--
+  Layout for displaying a series/collection of related artwork
+  Shows all pieces within a specific series
+-->
+
+<div class="series-page">
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}
+      <div class="series-description">
+        {{ page.description | markdownify }}
+      </div>
+    {% endif %}
+  </header>
+
+  {{ content }}
+
+  {% assign series_slug = page.title | slugify %}
+  {% assign series_artwork = site.artwork | where: "series", page.title %}
+
+  <div class="gallery-grid">
+    {% for piece in series_artwork %}
+      <div class="gallery-item">
+        <a href="{{ piece.url | relative_url }}" class="gallery-link">
+          {% if piece.thumbnail %}
+            <img src="{{ piece.thumbnail | relative_url }}" 
+                 alt="{{ piece.title }}"
+                 class="gallery-thumbnail">
+          {% elsif piece.image %}
+            <img src="{{ piece.image | relative_url }}" 
+                 alt="{{ piece.title }}"
+                 class="gallery-thumbnail">
+          {% endif %}
+          
+          <div class="gallery-overlay">
+            <h3 class="gallery-title">{{ piece.title }}</h3>
+            {% if piece.year %}
+              <p class="gallery-year">{{ piece.year }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="series-navigation">
+    <a href="{{ '/gallery/' | relative_url }}" class="btn btn-back">← Back to Gallery</a>
+  </div>
+</div>

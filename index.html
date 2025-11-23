@@ -1,4 +1,49 @@
 ---
 layout: home
-author_profile: true
+title: "Welcome to My Gallery"
+author_profile: false
+header:
+  overlay_color: "#e6dff2"
 ---
+
+<div style="text-align: center; margin: 3rem 0;">
+  <p style="font-size: 1.2rem; color: #9b7ec4; max-width: 700px; margin: 0 auto 2rem;">
+    Explore my collection of artwork across various mediums and styles.
+  </p>
+  <a href="/gallery/" class="btn btn--primary btn--large">View Full Gallery</a>
+</div>
+
+<h2 style="text-align: center; color: #9b7ec4; font-size: 2.5rem; margin: 4rem 0 3rem; font-weight: 600;">Latest Artwork</h2>
+
+<div class="gallery-grid" style="max-width: 1200px; margin: 2rem auto;">
+  {% assign latest_artwork = site.artwork | sort: 'date' | reverse | limit: 6 %}
+  {% for piece in latest_artwork %}
+    <div class="gallery-item">
+      <a href="{{ piece.url | relative_url }}" class="gallery-link">
+        {% if piece.thumbnail %}
+          <img src="{{ piece.thumbnail | relative_url }}" 
+               alt="{{ piece.title }}"
+               class="gallery-thumbnail">
+        {% elsif piece.image %}
+          <img src="{{ piece.image | relative_url }}" 
+               alt="{{ piece.title }}"
+               class="gallery-thumbnail">
+        {% endif %}
+        
+        <div class="gallery-overlay">
+          <h3 class="gallery-title">{{ piece.title }}</h3>
+          {% if piece.medium %}
+            <p class="gallery-medium">{{ piece.medium }}</p>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+
+<div style="text-align: center; margin: 3rem 0;">
+  <a href="/gallery/" class="btn btn--primary btn--large">View Full Gallery</a>
+</div>
+
+<!-- Image protection script -->
+<script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>

@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-03-24T09:26:18-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">PURPLE_DUCHESS</title><subtitle>My portfolio!</subtitle><author><name>Addyson Rinehart</name></author><entry><title type="html">The first post</title><link href="http://localhost:4000/template/" rel="alternate" type="text/html" title="The first post" /><published>2024-03-01T00:00:00-06:00</published><updated>2024-03-01T00:00:00-06:00</updated><id>http://localhost:4000/template</id><content type="html" xml:base="http://localhost:4000/template/"><![CDATA[<hr />
-<h2 class="text-center" id="example">Example</h2>
-
-<p><img src="/assets/images/about.jpg" alt="image-right" class="align-right" /></p>
-
-<p>;lkjasdfopi ;lkajsd;lkieifj oj;lkjadsiofjk oij;lkjwoeifjij</p>
-
-<p>**Photo by [<name>](https://unsplash.com/<name>) on [Unsplash](https://unsplash.com/photos/<photo>)**</photo></name></name></p>]]></content><author><name>Addyson Rinehart</name></author><summary type="html"><![CDATA[Example]]></summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-11-23T10:30:41-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The Purple Duchess</title><subtitle>Art portfolio and gallery showcasing original artwork by Addyson Rinehart</subtitle><author><name>Addyson Rinehart</name></author></feed>

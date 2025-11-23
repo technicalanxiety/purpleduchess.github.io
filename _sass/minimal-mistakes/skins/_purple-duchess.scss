@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Purple Duchess - Custom skin for art portfolio
+   Elegant purple color scheme with good contrast for artwork display
+   ========================================================================== */
+
+/* Colors - Dark purple palette with white text */
+$background-color: #2d1b3d !default;           // Deep purple background
+$text-color: #ffffff !default;                 // White text
+$primary-color: #d4c5e8 !default;              // Light purple (primary accent)
+$secondary-color: #b19cd9 !default;            // Medium purple
+$border-color: #6b4c7a !default;               // Medium purple border
+$code-background-color: #3d2f4d !default;      // Slightly lighter than background
+$code-background-color-dark: #1f1333 !default; // Darker code background
+$form-background-color: #3d2f4d !default;      // Form input backgrounds
+$footer-background-color: #1a0f2e !default;    // Very dark purple footer
+$link-color: #e6dff2 !default;                 // Very light purple links
+$link-color-hover: #ffffff !default;           // White on hover
+$link-color-visited: #d4c5e8 !default;         // Light purple for visited
+$masthead-link-color: $text-color !default;    // Header navigation color
+$masthead-link-color-hover: #e6dff2 !default;  // Light purple on hover
+$navicon-link-color-hover: $primary-color !default;
+
+/* Notices - Notification and alert styling */
+$notice-background-mix: 80% !default;
+$code-notice-background-mix: 85% !default;
+
+/* Syntax highlighting - Pastel purple-themed code colors */
+$base00: #f8f4fb !default;  // Background
+$base01: #f0ebf7 !default;  // Lighter background
+$base02: #e6dff2 !default;  // Selection background
+$base03: #b19cd9 !default;  // Comments
+$base04: #7d5fa8 !default;  // Dark foreground
+$base05: #4a3b5c !default;  // Default foreground
+$base06: #3d2f4d !default;  // Light foreground
+$base07: #2a1f38 !default;  // Lightest foreground
+$base08: #d97aa6 !default;  // Variables, XML tags
+$base09: #e8a87c !default;  // Integers, booleans
+$base0a: #c9a0dc !default;  // Classes, markup bold
+$base0b: #a8c9e8 !default;  // Strings, markup code
+$base0c: #9dc9d4 !default;  // Support, regex
+$base0d: #9b7ec4 !default;  // Functions, methods
+$base0e: #b19cd9 !default;  // Keywords, storage
+$base0f: #e89ba3 !default;  // Deprecated
+
+/* Social icons - Inherit color for consistency */
+.author__urls.social-icons i,
+.author__urls.social-icons .svg-inline--fa,
+.page__footer-follow .social-icons i,
+.page__footer-follow .social-icons .svg-inline--fa  {
+  color: inherit;
+}
+
+/* Page content links - Use primary purple */
+.page__content {
+  a {
+    color: $link-color;
+    
+    &:visited {
+      color: $link-color-visited;
+    }
+    
+    &:hover {
+      color: $link-color-hover;
+    }
+  }
+}
+
+/* Pagination buttons - Pastel purple themed */
+.pagination--pager {
+  color: #ffffff;
+  background-color: $primary-color;
+  border-color: transparent;
+
+  &:visited {
+    color: #ffffff;
+  }
+  
+  &:hover {
+    background-color: #9b7ec4;
+  }
+}
+
+/* Search box styling */
+.ais-search-box .ais-search-box--input {
+  background-color: $form-background-color;
+  color: $text-color;
+  border-color: $border-color;
+}
+
+/* Buttons - Purple accent styling */
+.btn {
+  &--primary {
+    background-color: $primary-color;
+    
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+}
+
+/* Masthead - Header navigation bar */
+.masthead {
+  background-color: rgba(45, 27, 61, 0.98);
+  border-bottom: 1px solid $border-color;
+}
+
+/* Archive items - Gallery and list items */
+.archive__item {
+  .archive__item-title {
+    color: $text-color;
+    
+    a {
+      color: $text-color;
+      
+      &:hover {
+        color: $link-color-hover;
+      }
+    }
+  }
+}
+
+/* Sidebar - Author profile and navigation */
+.sidebar {
+  background-color: rgba(61, 47, 77, 0.8);
+  border-right: 1px solid $border-color;
+}
+
+/* Page hero - Full-width header sections */
+.page__hero {
+  &--overlay {
+    background-color: $background-color;
+  }
+}

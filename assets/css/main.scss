@@ -7,3 +7,731 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/*
+  Custom Gallery Styles for Art Portfolio
+  Provides responsive grid layouts and enhanced image presentation
+*/
+
+/* Gallery Grid Layout - Responsive masonry-style grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  padding: 0;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Individual Gallery Item - Card-style container for each artwork */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #1a1a1a;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    .gallery-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+/* Gallery Link - Remove default link styling for cleaner presentation */
+.gallery-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+/* Gallery Thumbnail Images - Consistent sizing with object-fit */
+.gallery-thumbnail {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+  
+  .gallery-item:hover & {
+    transform: scale(1.05);
+  }
+}
+
+/* Overlay with artwork info - Appears on hover (always visible on mobile) */
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  padding: 2rem 1.5rem 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  @media (max-width: 768px) {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  }
+}
+
+.gallery-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.gallery-medium,
+.gallery-year {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Individual Artwork Detail Page - Full-width hero image layout */
+.artwork-detail {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.artwork-hero {
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.artwork-image {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  display: block;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* Artwork Information Section - Details below the hero image */
+.artwork-info {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: #2d1b3d;
+  
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+}
+
+.artwork-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+/* Artwork Metadata - Medium, dimensions, year, series info */
+.artwork-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  
+  .meta-item {
+    font-size: 0.95rem;
+    
+    strong {
+      color: #888;
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.artwork-description {
+  margin: 2rem 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ddd;
+}
+
+/* Navigation Buttons - Back to gallery links */
+.artwork-navigation,
+.series-navigation {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-5px);
+  }
+}
+
+/* Page Headers - Centered headers for gallery and series pages */
+.page-header {
+  text-align: center;
+  margin: 3rem 0;
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: #aaa;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Series Page Specific Styles */
+.series-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.series-description {
+  max-width: 800px;
+  margin: 1.5rem auto 3rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Gallery Page Specific Styles */
+.gallery-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Copyright notice on artwork pages */
+.artwork-copyright {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  background: rgba(212, 197, 232, 0.1);
+  border-left: 3px solid #d4c5e8;
+  border-radius: 4px;
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #e6dff2;
+    line-height: 1.6;
+  }
+}
+
+/* Image wrapper for watermark positioning */
+.image-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+/* Ensure wrapped gallery thumbnails maintain proper sizing */
+.gallery-item .image-wrapper {
+  display: block;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Ensure wrapped artwork images maintain centering */
+.artwork-hero .image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  
+  img {
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+  }
+}
+
+.image-watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  user-select: none;
+  z-index: 100;
+}
+
+/* Invisible overlay to prevent right-click on artwork hero */
+.artwork-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  cursor: default;
+}
+
+
+/*
+  Purple Duchess Gallery Enhancements
+  Pastel purple-themed styling for gallery elements
+*/
+
+/* Gallery grid with dark purple theme */
+.gallery-item {
+  background: linear-gradient(135deg, #3d2f4d 0%, #2d1b3d 100%);
+  border: 2px solid #6b4c7a;
+  
+  &:hover {
+    border-color: #d4c5e8;
+    box-shadow: 0 10px 40px rgba(212, 197, 232, 0.4);
+  }
+}
+
+/* Gallery overlay with soft pastel gradient */
+.gallery-overlay {
+  background: linear-gradient(to top, rgba(177, 156, 217, 0.9), transparent);
+  
+  @media (max-width: 768px) {
+    background: linear-gradient(to top, rgba(177, 156, 217, 0.85), transparent);
+  }
+}
+
+.gallery-title {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(74, 59, 92, 0.5);
+}
+
+.gallery-medium,
+.gallery-year {
+  color: #f0ebf7;
+}
+
+/* Artwork detail page enhancements */
+.artwork-hero {
+  background: linear-gradient(180deg, #1a0f2e 0%, #2d1b3d 50%, #1a0f2e 100%);
+}
+
+.artwork-image {
+  box-shadow: 0 10px 50px rgba(177, 156, 217, 0.3);
+}
+
+/* Artwork metadata card with dark purple styling */
+.artwork-meta {
+  background: linear-gradient(135deg, rgba(212, 197, 232, 0.15) 0%, rgba(177, 156, 217, 0.1) 100%);
+  border: 2px solid #6b4c7a;
+  
+  .meta-item {
+    strong {
+      color: #e6dff2;
+    }
+  }
+}
+
+/* Navigation buttons with dark purple theme */
+.btn-back {
+  background: rgba(212, 197, 232, 0.15);
+  border: 2px solid #d4c5e8;
+  color: #ffffff;
+  
+  &:hover {
+    background: rgba(212, 197, 232, 0.3);
+    border-color: #e6dff2;
+    color: #ffffff;
+  }
+}
+
+/* Page headers with light purple accent */
+.page-header {
+  h1 {
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(212, 197, 232, 0.5);
+  }
+}
+
+.page-description {
+  color: #e6dff2;
+}
+
+/* Series page styling */
+.series-description {
+  color: #7d5fa8;
+}
+
+/* Homepage enhancements */
+.page__hero-caption {
+  background: rgba(240, 235, 247, 0.95);
+  border-left: 3px solid #b19cd9;
+}
+
+/* Author profile sidebar */
+.author__avatar {
+  img {
+    border: 3px solid #b19cd9;
+  }
+}
+
+.author__bio {
+  color: #7d5fa8;
+}
+
+/* Links in content */
+a {
+  color: #9b7ec4;
+  
+  &:hover {
+    color: #7d5fa8;
+  }
+  
+  &:visited {
+    color: #a88dc7;
+  }
+}
+
+/* Primary buttons */
+.btn--primary {
+  background-color: #b19cd9;
+  color: #ffffff;
+  
+  &:hover {
+    background-color: #9b7ec4;
+  }
+}
+
+/* Archive items (gallery listings) */
+.archive__item-title {
+  a {
+    color: #4a3b5c;
+    
+    &:hover {
+      color: #9b7ec4;
+    }
+  }
+}
+
+/* Artwork description text */
+.artwork-description {
+  color: #5c4a6e;
+}
+
+
+/* Homepage specific styling */
+.page__hero {
+  background: #f8f4fb !important;
+  
+  .page__title {
+    color: #b19cd9 !important;
+    text-shadow: none !important;
+  }
+  
+  .page__lead {
+    color: #9b7ec4 !important;
+    text-shadow: none !important;
+  }
+}
+
+/* Homepage header overlay - force lavender background */
+.page__hero--overlay {
+  background: #f8f4fb !important;
+  
+  &::before,
+  &::after {
+    background: #f8f4fb !important;
+  }
+  
+  .page__title,
+  .page__meta,
+  .page__lead,
+  .btn {
+    text-shadow: none !important;
+  }
+  
+  .page__title {
+    color: #b19cd9 !important;
+  }
+  
+  .page__lead {
+    color: #9b7ec4 !important;
+  }
+}
+
+/* Ensure masthead site title is visible */
+.site-title {
+  color: #9b7ec4 !important;
+  
+  &:hover {
+    color: #7d5fa8 !important;
+  }
+}
+
+.site-subtitle {
+  color: #b19cd9 !important;
+}
+
+/* Main page content headings */
+.page__content {
+  h1 {
+    color: #7d5fa8 !important;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    color: #9b7ec4 !important;
+  }
+}
+
+/* Inline styled heading on homepage */
+div[style*="text-align: center"] {
+  h1 {
+    color: #7d5fa8 !important;
+  }
+  
+  p {
+    color: #9b7ec4 !important;
+  }
+}
+
+/* Fix header background to match page */
+.page__hero--overlay {
+  background-color: #e6dff2 !important;
+}
+
+.page__hero--overlay::before {
+  background-color: #e6dff2 !important;
+  opacity: 1 !important;
+}
+
+
+/* Center the hero title */
+.page__hero--overlay {
+  text-align: center;
+  
+  .page__title {
+    text-align: center;
+  }
+}
+
+
+/* Hide recent posts section on homepage */
+.layout--home h3.archive__subtitle {
+  display: none;
+}
+
+.layout--home .entries-list {
+  display: none;
+}
+
+
+/* Import elegant Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* Apply Playfair Display to everything */
+body,
+.site-title,
+.page__title,
+h1, h2, h3, h4, h5, h6,
+p, li, a, button, input, textarea, select {
+  font-family: 'Playfair Display', serif !important;
+}
+
+/* Headings get bold weight */
+.site-title,
+.page__title,
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Body text normal weight */
+body, p, li {
+  font-weight: 400;
+}
+
+
+/* About This Work section on artwork pages */
+.artwork-about {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(212, 197, 232, 0.1) 0%, rgba(177, 156, 217, 0.05) 100%);
+  border-left: 4px solid #d4c5e8;
+  border-radius: 4px;
+  
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #e6dff2;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.artwork-about-content {
+  color: #ffffff;
+  line-height: 1.8;
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Force visibility of artwork info sections with proper contrast */
+.artwork-detail {
+  width: 100% !important;
+  display: block !important;
+  background-color: #2d1b3d !important;
+}
+
+.artwork-info {
+  background-color: #2d1b3d !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  display: block !important;
+  visibility: visible !important;
+  padding: 2rem !important;
+}
+
+.artwork-title {
+  color: #ffffff !important;
+  display: block !important;
+  font-size: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.artwork-meta {
+  color: #ffffff !important;
+  display: flex !important;
+  visibility: visible !important;
+  background: rgba(212, 197, 232, 0.15) !important;
+  padding: 1.5rem !important;
+  border-radius: 8px !important;
+  border: 2px solid #6b4c7a !important;
+  
+  .meta-item {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    
+    strong {
+      color: #e6dff2 !important;
+    }
+  }
+}
+
+.artwork-description {
+  color: #ffffff !important;
+  display: block !important;
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  margin: 2rem 0 !important;
+}
+
+.artwork-about {
+  display: block !important;
+  visibility: visible !important;
+  background: linear-gradient(135deg, rgba(212, 197, 232, 0.2) 0%, rgba(177, 156, 217, 0.15) 100%) !important;
+  border-left: 4px solid #d4c5e8 !important;
+  border-radius: 4px !important;
+  padding: 2rem !important;
+  margin: 3rem 0 !important;
+  
+  h3 {
+    color: #ffffff !important;
+    font-size: 1.8rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+.artwork-about-content {
+  color: #ffffff !important;
+  display: block !important;
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  
+  p {
+    color: #ffffff !important;
+    margin-bottom: 1rem !important;
+  }
+}
