@@ -266,6 +266,11 @@ search: false
   padding: 2rem;
 }
 
+/* Gallery page header text */
+.page-description {
+  text-align: center;
+}
+
 /* Gallery Filters */
 .gallery-filters {
   display: flex;
@@ -344,6 +349,8 @@ search: false
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-end;
+  height: fit-content;
+  margin-top: auto;
   
   &:hover {
     background: rgba(212, 197, 232, 0.3);
@@ -357,6 +364,7 @@ search: false
   
   @media (max-width: 768px) {
     align-self: stretch;
+    margin-top: 0;
   }
 }
 
