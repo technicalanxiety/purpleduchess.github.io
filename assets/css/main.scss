@@ -335,6 +335,7 @@ search: false
 
 .filter-select {
   cursor: pointer;
+  height: auto;
   
   option {
     background: #2d1b3d;
@@ -343,28 +344,30 @@ search: false
 }
 
 .filter-reset {
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem;
   background: rgba(212, 197, 232, 0.15);
-  border: 2px solid #d4c5e8;
+  border: 2px solid #6b4c7a;
   border-radius: 4px;
   color: #fff;
   font-weight: 600;
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: normal;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
-  box-sizing: border-box;
+  height: auto;
+  display: block;
   
   &:hover {
     background: rgba(212, 197, 232, 0.3);
-    border-color: #e6dff2;
+    border-color: #d4c5e8;
   }
   
   &:focus {
-    outline: 2px solid #d4c5e8;
-    outline-offset: 2px;
+    outline: none;
+    border-color: #d4c5e8;
+    box-shadow: 0 0 0 3px rgba(212, 197, 232, 0.2);
   }
 }
 
