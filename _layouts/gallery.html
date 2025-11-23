@@ -25,7 +25,12 @@ layout: default
 
   <div class="gallery-grid">
     {% for piece in filtered_artwork %}
-      <div class="gallery-item">
+      <div class="gallery-item" 
+           data-title="{{ piece.title | downcase }}"
+           data-description="{{ piece.description | downcase }}"
+           data-medium="{{ piece.medium }}"
+           data-year="{{ piece.year }}"
+           data-series="{{ piece.series }}">
         <a href="{{ piece.url | relative_url }}" class="gallery-link">
           {% if piece.thumbnail %}
             <img src="{{ piece.thumbnail | relative_url }}" 
@@ -51,3 +56,7 @@ layout: default
 
 <!-- Image protection script -->
 <script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>
+<!-- Lightbox viewer -->
+<script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
+<!-- Gallery filtering -->
+<script src="{{ '/assets/js/gallery-filter.js' | relative_url }}"></script>
