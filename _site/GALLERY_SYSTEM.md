@@ -2,7 +2,7 @@
 
 ## Overview
 
-This portfolio uses a custom-built gallery system optimized for showcasing artwork, replacing the blog-centric structure of the original Minimal Mistakes theme.
+This portfolio uses a custom-built gallery system optimized for showcasing artwork, designed specifically for artists and creators.
 
 ## Architecture
 
@@ -197,9 +197,9 @@ Modify transitions and transforms:
 
 ### Color Scheme
 
-Theme uses Minimal Mistakes dark skin. Change in `_config.yml`:
+Theme uses the custom "purple-duchess" skin. Change in `_config.yml`:
 ```yaml
-minimal_mistakes_skin: "dark"  # or "air", "aqua", "contrast", etc.
+minimal_mistakes_skin: "purple-duchess"  # Custom dark purple theme
 ```
 
 ## Performance Considerations

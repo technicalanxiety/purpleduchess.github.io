@@ -266,9 +266,13 @@ search: false
   padding: 2rem;
 }
 
-/* Gallery page header text */
-.page-description {
+/* Gallery page content - center the description text */
+.gallery-page > p {
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  color: #b19cd9;
 }
 
 /* Gallery Filters */
@@ -346,11 +350,12 @@ search: false
   color: #fff;
   font-weight: 600;
   font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  line-height: 1.5;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-self: flex-end;
-  height: fit-content;
-  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
   
   &:hover {
     background: rgba(212, 197, 232, 0.3);
@@ -360,11 +365,6 @@ search: false
   &:focus {
     outline: 2px solid #d4c5e8;
     outline-offset: 2px;
-  }
-  
-  @media (max-width: 768px) {
-    align-self: stretch;
-    margin-top: 0;
   }
 }
 
