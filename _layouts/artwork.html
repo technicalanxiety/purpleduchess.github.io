@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+<!--
+  Custom layout for individual artwork pieces
+  Displays artwork in full-width format with details below
+-->
+
+<article class="artwork-detail">
+  <div class="artwork-hero">
+    {% if page.image %}
+      <img src="{{ page.image | relative_url }}" 
+           alt="{{ page.title }}" 
+           class="artwork-image">
+    {% endif %}
+  </div>
+
+  <div class="artwork-info">
+    <header>
+      <h1 class="artwork-title">{{ page.title }}</h1>
+      
+      <div class="artwork-meta">
+        {% if page.medium %}
+          <span class="meta-item"><strong>Medium:</strong> {{ page.medium }}</span>
+        {% endif %}
+        
+        {% if page.dimensions %}
+          <span class="meta-item"><strong>Dimensions:</strong> {{ page.dimensions }}</span>
+        {% endif %}
+        
+        {% if page.year %}
+          <span class="meta-item"><strong>Year:</strong> {{ page.year }}</span>
+        {% endif %}
+        
+        {% if page.series %}
+          <span class="meta-item">
+            <strong>Series:</strong> 
+            <a href="{{ '/series/' | append: page.series | slugify | relative_url }}">{{ page.series }}</a>
+          </span>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if page.description %}
+      <div class="artwork-description">
+        {{ page.description | markdownify }}
+      </div>
+    {% endif %}
+
+    {% if content and content != "" %}
+      <div class="artwork-about">
+        <h3>About This Work</h3>
+        <div class="artwork-about-content">
+          {{ content }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="artwork-copyright">
+      <p>© {{ page.year | default: "2024" }} The Purple Duchess. All rights reserved. This artwork may not be reproduced, distributed, or used without express written permission.</p>
+    </div>
+
+    <div class="artwork-navigation">
+      <a href="{{ '/gallery/' | relative_url }}" class="btn btn-back">← Back to Gallery</a>
+    </div>
+  </div>
+</article>
+
+<!-- Image protection script -->
+<script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>
