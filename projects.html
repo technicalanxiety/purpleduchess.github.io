@@ -1,0 +1,37 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+<div class="projects-page">
+  <header class="page-header">
+    <h1>All Projects</h1>
+    <p>Explore my complete collection of artwork</p>
+  </header>
+
+  <div class="projects-grid">
+    {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+    {% for project in sorted_projects %}
+      <div class="project-item">
+        <div class="project-image-container">
+          <a href="{{ project.url | relative_url }}">
+            {% if project.image %}
+              {% assign image_name = project.image | split: '/' | last | split: '.' | first %}
+              <img src="/assets/images/thumbnails/{{ image_name }}.jpg" alt="{{ project.title }}">
+            {% endif %}
+          </a>
+        </div>
+        <div class="project-info">
+          <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+          {% if project.medium %}
+            <p class="medium">{{ project.medium }}</p>
+          {% endif %}
+          {% if project.year %}
+            <p class="year">{{ project.year }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

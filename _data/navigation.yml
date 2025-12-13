@@ -1,6 +1,0 @@
-# Main navigation links for art portfolio
-main:
-  - title: "Gallery"
-    url: /gallery/
-  - title: "About"
-    url: /about/

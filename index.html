@@ -1,51 +1,159 @@
----
-layout: home
-title: "Welcome to My Gallery"
-author_profile: false
-header:
-  overlay_color: "#e6dff2"
----
-
-<div style="text-align: center; margin: 3rem 0;">
-  <p style="font-size: 1.2rem; color: #9b7ec4; max-width: 700px; margin: 0 auto 2rem;">
-    Explore my collection of artwork across various mediums and styles.
-  </p>
-  <a href="/gallery/" class="btn btn--primary btn--large">View Full Gallery</a>
-</div>
-
-<h2 style="text-align: center; color: #9b7ec4; font-size: 2.5rem; margin: 4rem 0 3rem; font-weight: 600;">Latest Artwork</h2>
-
-<div class="gallery-grid" style="max-width: 1200px; margin: 2rem auto;">
-  {% assign latest_artwork = site.artwork | sort: 'date' | reverse | limit: 6 %}
-  {% for piece in latest_artwork %}
-    <div class="gallery-item">
-      <a href="{{ piece.url | relative_url }}" class="gallery-link">
-        {% if piece.thumbnail %}
-          <img src="{{ piece.thumbnail | relative_url }}" 
-               alt="{{ piece.title }}"
-               class="gallery-thumbnail">
-        {% elsif piece.image %}
-          <img src="{{ piece.image | relative_url }}" 
-               alt="{{ piece.title }}"
-               class="gallery-thumbnail">
-        {% endif %}
-        
-        <div class="gallery-overlay">
-          <h3 class="gallery-title">{{ piece.title }}</h3>
-          {% if piece.medium %}
-            <p class="gallery-medium">{{ piece.medium }}</p>
-          {% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Purple Duchess - Art Portfolio</title>
+    <meta name="description" content="Art portfolio showcasing original artwork by Addyson Rinehart">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="brand-title">The Purple Duchess</div>
+                <div class="brand-subtitle">Artist & Creator</div>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle lavender mode">
+                    <span class="theme-icon">🌼</span>
+                </button></li>
+            </ul>
         </div>
-      </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Gallery</h1>
+            <p>Original artwork exploring color, form, and emotion through various mediums</p>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <main class="gallery">
+        <div class="gallery-container">
+            <!-- Artwork items will be dynamically loaded -->
+            <div class="artwork-item" data-title="Artwork 13" data-medium="Mixed Media" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_5367.jpg" 
+                         data-full="assets/images/artwork/IMG_5367.jpg"
+                         alt="Artwork 13">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 13</h3>
+                    <p class="medium">Mixed Media</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="artwork-item" data-title="Artwork 12" data-medium="Digital Art" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_3020.jpg" 
+                         data-full="assets/images/artwork/IMG_3020.jpg"
+                         alt="Artwork 12">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 12</h3>
+                    <p class="medium">Digital Art</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="artwork-item" data-title="Artwork 11" data-medium="Charcoal Drawing" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_2954.jpg" 
+                         data-full="assets/images/artwork/IMG_2954.jpg"
+                         alt="Artwork 11">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 11</h3>
+                    <p class="medium">Charcoal Drawing</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="artwork-item" data-title="Artwork 10" data-medium="Mixed Media" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_2572.jpg" 
+                         data-full="assets/images/artwork/IMG_2572.png"
+                         alt="Artwork 10">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 10</h3>
+                    <p class="medium">Mixed Media</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="artwork-item" data-title="Artwork 6" data-medium="Oil Painting" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_3943.jpg" 
+                         data-full="assets/images/artwork/IMG_3943.jpg"
+                         alt="Artwork 6">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 6</h3>
+                    <p class="medium">Oil Painting</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+
+            <div class="artwork-item" data-title="Artwork 5" data-medium="Acrylic Painting" data-year="2024">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/IMG_2266.jpg" 
+                         data-full="assets/images/artwork/IMG_2266.jpg"
+                         alt="Artwork 5">
+                </div>
+                <div class="artwork-info">
+                    <h3>Artwork 5</h3>
+                    <p class="medium">Acrylic Painting</p>
+                    <p class="year">2024</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img id="lightbox-image" src="" alt="">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-medium"></p>
+                <p id="lightbox-year"></p>
+                <div class="copyright">© The Purple Duchess - All Rights Reserved</div>
+            </div>
+        </div>
     </div>
-  {% endfor %}
-</div>
 
-<div style="text-align: center; margin: 3rem 0;">
-  <a href="/gallery/" class="btn btn--primary btn--large">View Full Gallery</a>
-</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Addyson Rinehart. All rights reserved.</p>
+            <div class="social-links">
+                <a href="mailto:contact@purpleduchess.com">Email</a>
+                <!-- Add more social links as needed -->
+            </div>
+        </div>
+    </footer>
 
-<!-- Image protection script -->
-<script src="{{ '/assets/js/image-protection.js' | relative_url }}"></script>
-<!-- Lightbox viewer -->
-<script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
+    <!-- JavaScript -->
+    <script src="js/theme.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/protection.js"></script>
+</body>
+</html>

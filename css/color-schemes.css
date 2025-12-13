@@ -1,0 +1,105 @@
+/* PURPLE COLOR SCHEME OPTIONS FOR THE PURPLE DUCHESS */
+
+/* ========================================
+   OPTION 1: DEEP PLUM & CREAM
+   Sophisticated, royal, elegant
+   ======================================== */
+.scheme-plum {
+    /* Primary Colors */
+    --primary-color: #6B4C7A;        /* Deep plum */
+    --primary-dark: #5A3F68;         /* Darker plum */
+    --primary-light: #8B6B9B;        /* Light plum */
+    
+    /* Neutrals */
+    --background: #FDFCFE;           /* Soft white with purple hint */
+    --surface: #FFFFFF;              /* Pure white */
+    --surface-alt: #F8F6FA;          /* Light purple-gray */
+    
+    /* Text Colors */
+    --text-primary: #2D2A2F;         /* Deep purple-black */
+    --text-secondary: #5C5760;       /* Purple-gray */
+    --text-muted: #9B9299;           /* Light purple-gray */
+    
+    /* Accents */
+    --accent: #4A3454;               /* Deep purple */
+    --border: #E8E4EA;               /* Purple-tinted border */
+    --shadow: rgba(45, 42, 47, 0.1); /* Purple shadow */
+}
+
+/* ========================================
+   OPTION 2: LAVENDER & CHARCOAL
+   Modern, soft, sophisticated
+   ======================================== */
+.scheme-lavender {
+    /* Primary Colors */
+    --primary-color: #8B7BA8;        /* Muted lavender */
+    --primary-dark: #756A94;         /* Darker lavender */
+    --primary-light: #A599C2;        /* Light lavender */
+    
+    /* Neutrals */
+    --background: #FAFBFC;           /* Cool white */
+    --surface: #FFFFFF;              /* Pure white */
+    --surface-alt: #F5F6F8;          /* Cool gray */
+    
+    /* Text Colors */
+    --text-primary: #2C2B35;         /* Purple-black */
+    --text-secondary: #4A4952;       /* Dark purple-gray */
+    --text-muted: #8A8A95;           /* Medium purple-gray */
+    
+    /* Accents */
+    --accent: #5D5470;               /* Deep lavender */
+    --border: #E6E7EA;               /* Cool border */
+    --shadow: rgba(44, 43, 53, 0.08); /* Cool shadow */
+}
+
+/* ========================================
+   OPTION 3: AUBERGINE & GOLD
+   Rich, luxurious, artistic
+   ======================================== */
+.scheme-aubergine {
+    /* Primary Colors */
+    --primary-color: #7D4F73;        /* Aubergine */
+    --primary-dark: #6B4262;         /* Dark aubergine */
+    --primary-light: #9B6B8F;        /* Light aubergine */
+    
+    /* Neutrals */
+    --background: #FEFCFD;           /* Warm white */
+    --surface: #FFFFFF;              /* Pure white */
+    --surface-alt: #F9F7F8;          /* Warm purple-gray */
+    
+    /* Text Colors */
+    --text-primary: #2F2A2D;         /* Warm purple-black */
+    --text-secondary: #5A5356;       /* Warm gray */
+    --text-muted: #9A9296;           /* Light warm gray */
+    
+    /* Accents */
+    --accent: #B8860B;               /* Dark goldenrod */
+    --border: #EAE6E8;               /* Warm border */
+    --shadow: rgba(47, 42, 45, 0.1); /* Warm shadow */
+}
+
+/* ========================================
+   OPTION 4: MAUVE & SAGE
+   Soft, artistic, contemporary
+   ======================================== */
+.scheme-mauve {
+    /* Primary Colors */
+    --primary-color: #9B7BA8;        /* Soft mauve */
+    --primary-dark: #846A91;         /* Darker mauve */
+    --primary-light: #B599C2;        /* Light mauve */
+    
+    /* Neutrals */
+    --background: #FCFCFD;           /* Neutral white */
+    --surface: #FFFFFF;              /* Pure white */
+    --surface-alt: #F7F7F9;          /* Soft gray */
+    
+    /* Text Colors */
+    --text-primary: #2E2D32;         /* Soft black */
+    --text-secondary: #52515A;       /* Medium gray */
+    --text-muted: #8F8E96;           /* Light gray */
+    
+    /* Accents */
+    --accent: #7A8471;               /* Sage green */
+    --border: #E9E8EB;               /* Neutral border */
+    --shadow: rgba(46, 45, 50, 0.08); /* Neutral shadow */
+}
