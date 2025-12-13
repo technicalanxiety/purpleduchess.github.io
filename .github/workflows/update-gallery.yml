@@ -1,0 +1,216 @@
+name: Update Gallery Nightly
+
+on:
+  schedule:
+    # Run every night at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    paths:
+      - 'assets/images/artwork/**'
+      - '_artwork/**'
+
+jobs:
+  update-gallery:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Install ImageMagick
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y imagemagick
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Generate gallery content
+      run: |
+        # Create the gallery generation script
+        cat > generate_gallery.js << 'EOF'
+        const fs = require('fs');
+        const path = require('path');
+        const { execSync } = require('child_process');
+
+        // Configuration
+        const ARTWORK_DIR = 'assets/images/artwork';
+        const THUMBNAILS_DIR = 'assets/images/thumbnails';
+        const ARTWORK_METADATA_DIR = '_artwork';
+        const INDEX_FILE = 'index.html';
+
+        // Ensure directories exist
+        if (!fs.existsSync(THUMBNAILS_DIR)) {
+          fs.mkdirSync(THUMBNAILS_DIR, { recursive: true });
+        }
+
+        // Get all artwork files
+        const artworkFiles = fs.readdirSync(ARTWORK_DIR)
+          .filter(file => /\.(jpg|jpeg|png|heic)$/i.test(file))
+          .filter(file => !file.startsWith('.'));
+
+        console.log(`Found ${artworkFiles.length} artwork files`);
+
+        // Generate thumbnails for any missing ones
+        artworkFiles.forEach(file => {
+          const nameWithoutExt = path.parse(file).name;
+          const thumbnailPath = path.join(THUMBNAILS_DIR, `${nameWithoutExt}.jpg`);
+          
+          if (!fs.existsSync(thumbnailPath)) {
+            console.log(`Generating thumbnail for ${file}`);
+            try {
+              execSync(`magick "${path.join(ARTWORK_DIR, file)}" -resize 400x300^ -gravity center -extent 400x300 -background white -quality 90 "${thumbnailPath}"`);
+              console.log(`✓ Created thumbnail: ${thumbnailPath}`);
+            } catch (error) {
+              console.error(`✗ Failed to create thumbnail for ${file}:`, error.message);
+            }
+          }
+        });
+
+        // Load existing metadata or create default
+        const artworkData = [];
+        
+        artworkFiles.forEach((file, index) => {
+          const nameWithoutExt = path.parse(file).name;
+          const metadataFile = path.join(ARTWORK_METADATA_DIR, `${nameWithoutExt}.md`);
+          
+          let metadata = {
+            title: `Artwork ${artworkFiles.length - index}`,
+            medium: 'Mixed Media',
+            year: '2024',
+            description: ''
+          };
+          
+          // Try to load metadata from markdown file
+          if (fs.existsSync(metadataFile)) {
+            try {
+              const content = fs.readFileSync(metadataFile, 'utf8');
+              const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+              
+              if (frontMatterMatch) {
+                const frontMatter = frontMatterMatch[1];
+                const titleMatch = frontMatter.match(/title:\s*["']?([^"'\n]+)["']?/);
+                const mediumMatch = frontMatter.match(/medium:\s*["']?([^"'\n]+)["']?/);
+                const yearMatch = frontMatter.match(/year:\s*["']?([^"'\n]+)["']?/);
+                
+                if (titleMatch) metadata.title = titleMatch[1];
+                if (mediumMatch) metadata.medium = mediumMatch[1];
+                if (yearMatch) metadata.year = yearMatch[1];
+              }
+            } catch (error) {
+              console.log(`Could not parse metadata for ${file}, using defaults`);
+            }
+          }
+          
+          artworkData.push({
+            file: file,
+            nameWithoutExt: nameWithoutExt,
+            ...metadata
+          });
+        });
+
+        // Sort by filename (newest first, assuming chronological naming)
+        artworkData.sort((a, b) => b.file.localeCompare(a.file));
+
+        // Generate HTML for gallery items
+        const galleryHTML = artworkData.map(artwork => `
+            <div class="artwork-item" data-title="${artwork.title}" data-medium="${artwork.medium}" data-year="${artwork.year}">
+                <div class="artwork-image">
+                    <img src="assets/images/thumbnails/${artwork.nameWithoutExt}.jpg" 
+                         data-full="assets/images/artwork/${artwork.file}"
+                         alt="${artwork.title}">
+                </div>
+                <div class="artwork-info">
+                    <h3>${artwork.title}</h3>
+                    <p class="medium">${artwork.medium}</p>
+                    <p class="year">${artwork.year}</p>
+                </div>
+            </div>`).join('\n');
+
+        // Read current index.html
+        let indexContent = fs.readFileSync(INDEX_FILE, 'utf8');
+
+        // Replace gallery content between markers
+        const startMarker = '<!-- GALLERY_START -->';
+        const endMarker = '<!-- GALLERY_END -->';
+        
+        const startIndex = indexContent.indexOf(startMarker);
+        const endIndex = indexContent.indexOf(endMarker);
+        
+        if (startIndex !== -1 && endIndex !== -1) {
+          const before = indexContent.substring(0, startIndex + startMarker.length);
+          const after = indexContent.substring(endIndex);
+          
+          indexContent = before + '\n' + galleryHTML + '\n            ' + after;
+          
+          fs.writeFileSync(INDEX_FILE, indexContent);
+          console.log(`✓ Updated gallery with ${artworkData.length} artworks`);
+        } else {
+          console.error('Could not find gallery markers in index.html');
+          process.exit(1);
+        }
+
+        // Create metadata files for any artwork that doesn't have them
+        if (!fs.existsSync(ARTWORK_METADATA_DIR)) {
+          fs.mkdirSync(ARTWORK_METADATA_DIR, { recursive: true });
+        }
+
+        artworkData.forEach(artwork => {
+          const metadataFile = path.join(ARTWORK_METADATA_DIR, `${artwork.nameWithoutExt}.md`);
+          if (!fs.existsSync(metadataFile)) {
+            const metadataContent = `---
+title: ${artwork.title}
+medium: ${artwork.medium}
+year: ${artwork.year}
+date: ${new Date().toISOString().split('T')[0]}
+---
+
+# ${artwork.title}
+
+**Medium:** ${artwork.medium}  
+**Year:** ${artwork.year}
+
+<!-- Add description here -->
+`;
+            fs.writeFileSync(metadataFile, metadataContent);
+            console.log(`✓ Created metadata file: ${metadataFile}`);
+          }
+        });
+
+        console.log('Gallery update complete!');
+        EOF
+
+        # Run the gallery generator
+        node generate_gallery.js
+        
+    - name: Check for changes
+      id: changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Gallery Update Bot"
+        
+        if git diff --quiet; then
+          echo "No changes detected"
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "Changes detected"
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push changes
+      if: steps.changes.outputs.changed == 'true'
+      run: |
+        git add .
+        git commit -m "🎨 Auto-update gallery: $(date '+%Y-%m-%d %H:%M UTC')
+
+        - Generated thumbnails for new artwork
+        - Updated gallery with latest pieces
+        - Created metadata files for new artwork
+        
+        Automated by GitHub Actions"
+        git push
