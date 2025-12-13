@@ -45,9 +45,7 @@ For inquiries about artwork, commissions, or collaborations:
 
 This portfolio is built with vanilla HTML, CSS, and JavaScript for optimal performance and runs on GitHub Pages. For gallery management and technical documentation, see:
 
-- [Automated Gallery Management](AUTOMATED_GALLERY.md) - Hands-off publishing workflow
-- [Gallery Management Guide](GALLERY_MANAGEMENT.md) - Manual management options
-- [Example Usage](EXAMPLE_USAGE.md) - Step-by-step examples
+- [Gallery Management Guide](GALLERY_MANAGEMENT.md) - Complete guide with automated publishing, manual methods, and examples
 
 ---
 
